@@ -1,0 +1,13 @@
+framework: node
+language: typescript
+architectureStyle: monorepo
+packageManager: pnpm
+detectedAt: 2026-05-19T03:50:59.473Z
+monorepo: true
+summary: Veynt is an AI-native pre-commit engineering reviewer designed to
+  analyze staged changes and branch diffs, detecting vulnerabilities,
+  architectural drift, malicious AI rule changes, and low-quality AI-generated
+  code before they enter your repository.
+purpose: To provide real-time feedback on potential issues in Git diffs during
+  the pre-commit phase, ensuring high code quality and security standards are
+  maintained.

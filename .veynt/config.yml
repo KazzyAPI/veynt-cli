@@ -1,0 +1,27 @@
+version: "1"
+provider:
+  name: ollama
+  model: hf.co/lmstudio-community/DeepSeek-Coder-V2-Lite-Instruct-GGUF:Q4_K_M
+  maxTokens: 4096
+review:
+  chunking:
+    delayMsBetweenChunks: 0
+    requestsPerMinute: 0
+  strictness: balanced
+  suggestions: true
+  verbose: false
+blocking:
+  local:
+    - high
+    - critical
+  ci:
+    - medium
+    - high
+    - critical
+ignore:
+  findings: []
+  rules: []
+scan:
+  includeContextFiles: true
+  maxContextFiles: 10
+  scanRuleFiles: true

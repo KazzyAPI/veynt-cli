@@ -1,0 +1,22 @@
+commentDensity: low
+nullabilityPattern: prefer explicit null handling over excessive optionals
+utilityReusePatterns:
+  - Reuse existing utilities before introducing helpers
+  - Prefer framework-native patterns over custom abstractions
+dependencyPatterns:
+  - Avoid adding dependencies for trivial functionality
+  - Prefer existing project dependencies
+antiPatterns:
+  - Excessive abstraction layers
+  - Over-commenting obvious code
+  - Business logic in wrong layer
+  - Duplicated domain rules
+  - Nullable-heavy APIs without justification
+testingApproach: The provided code samples do not explicitly show a testing
+  approach. However, given the context of an AI-native pre-commit engineering
+  reviewer, it is assumed that extensive unit and integration tests are in place
+  to ensure reliability.
+summary: The inferred standards indicate low comment density, explicit null
+  handling, reuse of utilities, preference for existing dependencies, and
+  avoidance of certain anti-patterns. The testing approach is assumed to be
+  thorough based on the context.

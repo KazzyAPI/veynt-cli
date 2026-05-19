@@ -1,0 +1,31 @@
+{
+  "name": "@veynt/review-engine",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "lint": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@veynt/analyzers": "workspace:*",
+    "@veynt/config": "workspace:*",
+    "@veynt/core": "workspace:*",
+    "@veynt/findings": "workspace:*",
+    "@veynt/git": "workspace:*",
+    "@veynt/providers": "workspace:*",
+    "yaml": "^2.7.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.5"
+  }
+}

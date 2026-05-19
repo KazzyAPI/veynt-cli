@@ -1,0 +1,57 @@
+layers:
+  - packages/analyzers
+  - packages/cli
+  - packages/config
+  - packages/core
+  - packages/findings
+  - packages/git
+  - packages/hooks
+  - packages/providers
+  - packages/review-engine
+separationOfConcerns:
+  - Each packages/* workspace is a bounded module with a single responsibility
+  - CLI orchestrates commands; review-engine owns review flow; providers are
+    adapters only
+  - Shared types live in @veynt/core; config loading stays in @veynt/config
+  - Cross-package imports use workspace:* and public package entrypoints only
+  - Each package within the monorepo has a single responsibility, promoting
+    modularity and maintainability.
+  - The CLI package orchestrates commands for user interaction.
+  - The review-engine package manages the AI review process.
+  - Providers are adapters that handle specific integrations with external
+    services.
+  - Shared utilities and types reside in core packages to avoid redundancy.
+namingConventions:
+  components: PascalCase
+  functions: camelCase
+  files: kebab-case for general files, PascalCase for component files
+  packages: PascalCase
+layeringConventions:
+  - packages/analyzers
+  - packages/cli
+  - packages/config
+  - packages/core
+  - packages/findings
+  - packages/git
+  - packages/hooks
+  - packages/providers
+  - packages/review-engine
+  - Core functionalities are encapsulated in core packages.
+  - Configuration and CLI logic reside within the cli package.
+  - Analyzers and other specialized tools are grouped under analyzers.
+  - Review-related tasks are handled by review-engine.
+moduleBoundaries:
+  - Do not bypass package boundaries with deep relative imports across packages/*
+  - "@veynt/cli must not import from providers directly; use core services
+    instead."
+  - "@veynt/review-engine should not depend on CLI commands; keep business logic
+    isolated."
+dependencyRules:
+  - All dependencies within the monorepo are workspace:* scoped to ensure
+    consistency and avoid version conflicts.
+  - Avoid adding new external dependencies unless strictly necessary for core
+    functionality.
+summary: The architecture is organized into distinct layers with clear
+  separation of concerns, promoting a modular and maintainable codebase. Each
+  package focuses on a single responsibility, ensuring that changes in one area
+  do not affect others unnecessarily.

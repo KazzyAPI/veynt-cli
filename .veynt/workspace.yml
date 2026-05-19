@@ -1,0 +1,577 @@
+generatedAt: 2026-05-19T04:16:24.521Z
+overview: >-
+  The Veynt OSS project is an AI-native pre-commit engineering reviewer designed
+  to analyze staged changes and branch diffs, detecting vulnerabilities,
+  architectural drift, malicious AI rule changes, and low-quality AI-generated
+  code before they enter your repository. This comprehensive tool is built using
+  TypeScript and leverages the pnpm package manager, ensuring a modular and
+  maintainable architecture across its packages. The project consists of several
+  key components, each with a distinct role within the monorepo structure:
+
+
+  1. **@veynt/analyzers**: Responsible for repository analysis and baseline
+  generation to ensure consistent standards are maintained.
+
+  2. **@veynt/cli**: Provides the command-line interface through which users
+  interact with Veynt, executing commands like `init`, `scan`, and configuration
+  adjustments.
+
+  3. **@veynt/config**: Manages configuration loading and merging across
+  different levels (repository, user, environment) to provide a flexible and
+  adaptable review process.
+
+  4. **@veynt/core**: Contains shared types and utilities that are essential for
+  the operation of other packages within the monorepo.
+
+  5. **@veynt/findings**: Handles parsing and managing findings from AI reviews,
+  including blocking and suppression services.
+
+  6. **@veynt/git**: Integrates with Git to analyze staged changes and branch
+  diffs, providing real-time feedback during development cycles.
+
+  7. **@veynt/hooks**: Ensures that pre-commit hooks are installed and
+  configured correctly for consistent review processes across repositories.
+
+  8. **@veynt/providers**: Acts as an adapter layer for various AI providers,
+  allowing Veynt to utilize different services seamlessly.
+
+  9. **@veynt/review-engine**: Orchestrates the review process, handling prompt
+  construction and chunking of data for efficient AI interactions.
+repository:
+  name: veynt
+  description: AI-native pre-commit engineering reviewer for Git diffs
+  packageManager: pnpm
+  monorepo: true
+  rootScripts:
+    - build
+    - test
+    - lint
+    - veynt
+packages:
+  - name: "@veynt/analyzers"
+    path: packages/analyzers
+    role: Repository analysis and baselines
+    description: Responsible for repository analysis and baseline generation to
+      ensure consistent standards are maintained.
+  - name: "@veynt/cli"
+    path: packages/cli
+    role: CLI entrypoint and commands
+    description: Provides the command-line interface through which users interact
+      with Veynt, executing commands like `init`, `scan`, and configuration
+      adjustments.
+  - name: "@veynt/config"
+    path: packages/config
+    role: Configuration loading and merge
+    description: Manages configuration loading and merging across different levels
+      (repository, user, environment) to provide a flexible and adaptable review
+      process.
+  - name: "@veynt/core"
+    path: packages/core
+    role: Shared types and utilities
+    description: Contains shared types and utilities that are essential for the
+      operation of other packages within the monorepo.
+  - name: "@veynt/findings"
+    path: packages/findings
+    role: Finding parsing and blocking
+    description: Handles parsing and managing findings from AI reviews, including
+      blocking and suppression services.
+  - name: "@veynt/git"
+    path: packages/git
+    role: Git diff and hook integration
+    description: Integrates with Git to analyze staged changes and branch diffs,
+      providing real-time feedback during development cycles.
+  - name: "@veynt/hooks"
+    path: packages/hooks
+    role: Git hook installation
+    description: Ensures that pre-commit hooks are installed and configured
+      correctly for consistent review processes across repositories.
+  - name: "@veynt/providers"
+    path: packages/providers
+    role: AI provider adapters
+    description: Acts as an adapter layer for various AI providers, allowing Veynt
+      to utilize different services seamlessly.
+  - name: "@veynt/review-engine"
+    path: packages/review-engine
+    role: Review orchestration and prompts
+    description: Orchestrates the review process, handling prompt construction and
+      chunking of data for efficient AI interactions.
+areas:
+  - id: docs
+    label: Docs
+    paths:
+      - README.md
+      - docs/prd.md
+    description: Documentation related to the project setup, usage instructions, and
+      product requirements document (PRD).
+  - id: examples
+    label: Examples
+    paths:
+      - examples/sample-config.yml
+    description: Example configurations and setups that demonstrate how to use Veynt
+      with different settings.
+  - id: packages/analyzers
+    label: Analyzers
+    paths:
+      - packages/analyzers/**/*
+    description: Contains the core logic for repository analysis, baseline
+      generation, and rule file analysis.
+  - id: packages/cli
+    label: CLI
+    paths:
+      - packages/cli/**/*
+    description: Provides the command-line interface for interacting with Veynt,
+      including commands for initialization, scanning, and configuration.
+  - id: packages/config
+    label: Config
+    paths:
+      - packages/config/**/*
+    description: Manages configurations across different levels of the repository,
+      user, and environment settings.
+  - id: packages/core
+    label: Core
+    paths:
+      - packages/core/**/*
+    description: Contains shared types and utilities that are essential for other
+      packages within the monorepo.
+  - id: packages/findings
+    label: Findings
+    paths:
+      - packages/findings/**/*
+    description: Handles parsing and managing findings from AI reviews, including
+      blocking and suppression services.
+  - id: packages/git
+    label: Git
+    paths:
+      - packages/git/**/*
+    description: Integrates with Git to analyze staged changes and branch diffs,
+      providing real-time feedback during development cycles.
+  - id: packages/hooks
+    label: Hooks
+    paths:
+      - packages/hooks/**/*
+    description: Ensures that pre-commit hooks are installed and configured
+      correctly for consistent review processes across repositories.
+  - id: packages/providers
+    label: Providers
+    paths:
+      - packages/providers/**/*
+    description: Acts as an adapter layer for various AI providers, allowing Veynt
+      to utilize different services seamlessly.
+  - id: packages/review-engine
+    label: Review Engine
+    paths:
+      - packages/review-engine/**/*
+    description: Orchestrates the review process, handling prompt construction and
+      chunking of data for efficient AI interactions.
+entryPoints:
+  - packages/analyzers/src/index.ts
+  - packages/cli/src/index.ts
+  - packages/config/src/index.ts
+  - packages/core/src/index.ts
+  - packages/findings/src/index.ts
+  - packages/git/src/index.ts
+  - packages/hooks/src/index.ts
+  - packages/providers/src/index.ts
+  - packages/review-engine/src/index.ts
+commands:
+  - init
+  - analyse
+  - scan
+  - override
+  - ignore
+  - config
+  - hooks
+techStack:
+  - typescript
+  - node
+  - pnpm
+  - "@veynt/core"
+  - "@veynt/config"
+  - "@veynt/providers"
+  - "@veynt/analyzers"
+  - "@veynt/findings"
+  - "@veynt/git"
+  - "@veynt/hooks"
+  - "@veynt/review-engine"
+  - commander
+  - yaml
+conventions:
+  - Each packages/* workspace is a bounded module with a single responsibility
+  - CLI orchestrates commands; review-engine owns review flow; providers are
+    adapters only
+  - Shared types live in @veynt/core; config loading stays in @veynt/config
+  - Cross-package imports use workspace:* and public package entrypoints only
+  - "components: PascalCase"
+  - "functions: camelCase"
+  - "files: kebab-case or PascalCase for components"
+  - Reuse existing utilities before introducing helpers
+  - Prefer framework-native patterns over custom abstractions
+  - All dependencies within the monorepo are workspace:* scoped to ensure
+    consistency and avoid version conflicts.
+  - Avoid adding new external dependencies unless strictly necessary for core
+    functionality.
+  - Each package within the monorepo has a single responsibility, promoting
+    modularity and maintainability.
+  - "@veynt/cli must not import from providers directly; use core services
+    instead."
+  - "@veynt/review-engine should not depend on CLI commands; keep business logic
+    isolated."
+reviewHints:
+  - Respect monorepo package boundaries — avoid cross-package coupling that
+    bypasses public APIs.
+  - Keep CLI commands thin; business logic belongs in review-engine, analyzers,
+    or config.
+  - Do not commit API keys; user secrets live in ~/.veynt/config.yml only.
+  - Match existing TypeScript conventions and pnpm workspace dependency patterns.
+  - "Avoid: Excessive abstraction layers"
+  - "Avoid: Over-commenting obvious code"
+  - "Avoid: Business logic in wrong layer"
+  - "Avoid: Duplicated domain rules"
+  - "Avoid: Nullable-heavy APIs without justification"
+  - Ensure that all AI provider integrations are correctly configured and
+    functional.
+  - Check the handling of rate limits and retry mechanisms to avoid service
+    disruptions.
+  - Verify that baseline generation accurately reflects the project's
+    architecture and standards.
+  - Test the suppression rules thoroughly to ensure they work as expected across
+    different scenarios.
+dataFlow: The data flow through Veynt involves Git diff analysis, repository
+  profiling, AI prompt construction, and provider interactions. The CLI commands
+  trigger these flows, with each command orchestrating a specific aspect of the
+  review process.
+tokenIndex: >-
+  @workspace.generated 2026-05-19T04:16:24.521Z
+
+  @repo.name veynt
+
+  @repo.packageManager pnpm
+
+  @repo.monorepo true
+
+  @repo.description AI-native pre-commit engineering reviewer for Git diffs
+
+
+  ## overview
+
+  The Veynt OSS project is an AI-native pre-commit engineering reviewer designed
+  to analyze staged changes and branch diffs, detecting vulnerabilities,
+  architectural drift, malicious AI rule changes, and low-quality AI-generated
+  code before they enter your repository. This comprehensive tool is built using
+  TypeScript and leverages the pnpm package manager, ensuring a modular and
+  maintainable architecture across its packages. The project consists of several
+  key components, each with a distinct role within the monorepo structure:
+
+
+  1. **@veynt/analyzers**: Responsible for repository analysis and baseline
+  generation to ensure consistent standards are maintained.
+
+  2. **@veynt/cli**: Provides the command-line interface through which users
+  interact with Veynt, executing commands like `init`, `scan`, and configuration
+  adjustments.
+
+  3. **@veynt/config**: Manages configuration loading and merging across
+  different levels (repository, user, environment) to provide a flexible and
+  adaptable review process.
+
+  4. **@veynt/core**: Contains shared types and utilities that are essential for
+  the operation of other packages within the monorepo.
+
+  5. **@veynt/findings**: Handles parsing and managing findings from AI reviews,
+  including blocking and suppression services.
+
+  6. **@veynt/git**: Integrates with Git to analyze staged changes and branch
+  diffs, providing real-time feedback during development cycles.
+
+  7. **@veynt/hooks**: Ensures that pre-commit hooks are installed and
+  configured correctly for consistent review processes across repositories.
+
+  8. **@veynt/providers**: Acts as an adapter layer for various AI providers,
+  allowing Veynt to utilize different services seamlessly.
+
+  9. **@veynt/review-engine**: Orchestrates the review process, handling prompt
+  construction and chunking of data for efficient AI interactions.
+
+
+  ## packages
+
+  @pkg name=@veynt/analyzers path=packages/analyzers role=Repository analysis
+  and baselines desc=Responsible for repository analysis and baseline generation
+  to ensure consistent standards are maintained.
+
+  @pkg name=@veynt/cli path=packages/cli role=CLI entrypoint and commands
+  desc=Provides the command-line interface through which users interact with
+  Veynt, executing commands like `init`, `scan`, and configuration adjustments.
+
+  @pkg name=@veynt/config path=packages/config role=Configuration loading and
+  merge desc=Manages configuration loading and merging across different levels
+  (repository, user, environment) to provide a flexible and adaptable review
+  process.
+
+  @pkg name=@veynt/core path=packages/core role=Shared types and utilities
+  desc=Contains shared types and utilities that are essential for the operation
+  of other packages within the monorepo.
+
+  @pkg name=@veynt/findings path=packages/findings role=Finding parsing and
+  blocking desc=Handles parsing and managing findings from AI reviews, including
+  blocking and suppression services.
+
+  @pkg name=@veynt/git path=packages/git role=Git diff and hook integration
+  desc=Integrates with Git to analyze staged changes and branch diffs, providing
+  real-time feedback during development cycles.
+
+  @pkg name=@veynt/hooks path=packages/hooks role=Git hook installation
+  desc=Ensures that pre-commit hooks are installed and configured correctly for
+  consistent review processes across repositories.
+
+  @pkg name=@veynt/providers path=packages/providers role=AI provider adapters
+  desc=Acts as an adapter layer for various AI providers, allowing Veynt to
+  utilize different services seamlessly.
+
+  @pkg name=@veynt/review-engine path=packages/review-engine role=Review
+  orchestration and prompts desc=Orchestrates the review process, handling
+  prompt construction and chunking of data for efficient AI interactions.
+
+
+  ## paths.docs
+
+  @area id=docs label=Docs desc=Documentation related to the project setup,
+  usage instructions, and product requirements document (PRD).
+
+  @path README.md
+
+  @path docs/prd.md
+
+
+  ## paths.examples
+
+  @area id=examples label=Examples desc=Example configurations and setups that
+  demonstrate how to use Veynt with different settings.
+
+  @path examples/sample-config.yml
+
+
+  ## paths.packages/analyzers
+
+  @area id=packages/analyzers label=Analyzers desc=Contains the core logic for
+  repository analysis, baseline generation, and rule file analysis.
+
+  @path packages/analyzers/**/*
+
+
+  ## paths.packages/cli
+
+  @area id=packages/cli label=CLI desc=Provides the command-line interface for
+  interacting with Veynt, including commands for initialization, scanning, and
+  configuration.
+
+  @path packages/cli/**/*
+
+
+  ## paths.packages/config
+
+  @area id=packages/config label=Config desc=Manages configurations across
+  different levels of the repository, user, and environment settings.
+
+  @path packages/config/**/*
+
+
+  ## paths.packages/core
+
+  @area id=packages/core label=Core desc=Contains shared types and utilities
+  that are essential for other packages within the monorepo.
+
+  @path packages/core/**/*
+
+
+  ## paths.packages/findings
+
+  @area id=packages/findings label=Findings desc=Handles parsing and managing
+  findings from AI reviews, including blocking and suppression services.
+
+  @path packages/findings/**/*
+
+
+  ## paths.packages/git
+
+  @area id=packages/git label=Git desc=Integrates with Git to analyze staged
+  changes and branch diffs, providing real-time feedback during development
+  cycles.
+
+  @path packages/git/**/*
+
+
+  ## paths.packages/hooks
+
+  @area id=packages/hooks label=Hooks desc=Ensures that pre-commit hooks are
+  installed and configured correctly for consistent review processes across
+  repositories.
+
+  @path packages/hooks/**/*
+
+
+  ## paths.packages/providers
+
+  @area id=packages/providers label=Providers desc=Acts as an adapter layer for
+  various AI providers, allowing Veynt to utilize different services seamlessly.
+
+  @path packages/providers/**/*
+
+
+  ## paths.packages/review-engine
+
+  @area id=packages/review-engine label=Review Engine desc=Orchestrates the
+  review process, handling prompt construction and chunking of data for
+  efficient AI interactions.
+
+  @path packages/review-engine/**/*
+
+
+  ## entryPoints
+
+  @entry packages/analyzers/src/index.ts
+
+  @entry packages/cli/src/index.ts
+
+  @entry packages/config/src/index.ts
+
+  @entry packages/core/src/index.ts
+
+  @entry packages/findings/src/index.ts
+
+  @entry packages/git/src/index.ts
+
+  @entry packages/hooks/src/index.ts
+
+  @entry packages/providers/src/index.ts
+
+  @entry packages/review-engine/src/index.ts
+
+
+  ## commands
+
+  @cmd init
+
+  @cmd analyse
+
+  @cmd scan
+
+  @cmd override
+
+  @cmd ignore
+
+  @cmd config
+
+  @cmd hooks
+
+
+  ## techStack
+
+  @tech typescript
+
+  @tech node
+
+  @tech pnpm
+
+  @tech @veynt/core
+
+  @tech @veynt/config
+
+  @tech @veynt/providers
+
+  @tech @veynt/analyzers
+
+  @tech @veynt/findings
+
+  @tech @veynt/git
+
+  @tech @veynt/hooks
+
+  @tech @veynt/review-engine
+
+  @tech commander
+
+  @tech yaml
+
+
+  ## conventions
+
+  @rule Each packages/* workspace is a bounded module with a single
+  responsibility
+
+  @rule CLI orchestrates commands; review-engine owns review flow; providers are
+  adapters only
+
+  @rule Shared types live in @veynt/core; config loading stays in @veynt/config
+
+  @rule Cross-package imports use workspace:* and public package entrypoints
+  only
+
+  @rule components: PascalCase
+
+  @rule functions: camelCase
+
+  @rule files: kebab-case or PascalCase for components
+
+  @rule Reuse existing utilities before introducing helpers
+
+  @rule Prefer framework-native patterns over custom abstractions
+
+  @rule All dependencies within the monorepo are workspace:* scoped to ensure
+  consistency and avoid version conflicts.
+
+  @rule Avoid adding new external dependencies unless strictly necessary for
+  core functionality.
+
+  @rule Each package within the monorepo has a single responsibility, promoting
+  modularity and maintainability.
+
+  @rule @veynt/cli must not import from providers directly; use core services
+  instead.
+
+  @rule @veynt/review-engine should not depend on CLI commands; keep business
+  logic isolated.
+
+
+  ## reviewHints
+
+  @hint Respect monorepo package boundaries — avoid cross-package coupling that
+  bypasses public APIs.
+
+  @hint Keep CLI commands thin; business logic belongs in review-engine,
+  analyzers, or config.
+
+  @hint Do not commit API keys; user secrets live in ~/.veynt/config.yml only.
+
+  @hint Match existing TypeScript conventions and pnpm workspace dependency
+  patterns.
+
+  @hint Avoid: Excessive abstraction layers
+
+  @hint Avoid: Over-commenting obvious code
+
+  @hint Avoid: Business logic in wrong layer
+
+  @hint Avoid: Duplicated domain rules
+
+  @hint Avoid: Nullable-heavy APIs without justification
+
+  @hint Ensure that all AI provider integrations are correctly configured and
+  functional.
+
+  @hint Check the handling of rate limits and retry mechanisms to avoid service
+  disruptions.
+
+  @hint Verify that baseline generation accurately reflects the project's
+  architecture and standards.
+
+  @hint Test the suppression rules thoroughly to ensure they work as expected
+  across different scenarios.
+
+
+  ## dataFlow
+
+  The data flow through Veynt involves Git diff analysis, repository profiling,
+  AI prompt construction, and provider interactions. The CLI commands trigger
+  these flows, with each command orchestrating a specific aspect of the review
+  process.

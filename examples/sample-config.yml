@@ -1,0 +1,31 @@
+version: "1"
+provider:
+  name: openai
+  model: gpt-4o-mini
+  maxTokens: 4096
+review:
+  strictness: strict
+  suggestions: true
+  verbose: false
+  chunking:
+    enabled: true
+    maxFilesPerChunk: 4
+    maxCharsPerChunk: 40000
+    delayMsBetweenChunks: 2000
+    maxRetries: 3
+blocking:
+  local:
+    - high
+    - critical
+  ci:
+    - medium
+    - high
+    - critical
+ignore:
+  findings: []
+  rules:
+    - comment-density
+scan:
+  includeContextFiles: true
+  maxContextFiles: 10
+  scanRuleFiles: true
