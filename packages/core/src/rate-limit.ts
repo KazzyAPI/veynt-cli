@@ -1,8 +1,16 @@
 const RATE_LIMIT_PATTERN = /429|rate.?limit|quota|resource.?exhausted|too many requests/i;
 
+const TRANSIENT_PROVIDER_PATTERN =
+  /\b503\b|\b502\b|\b504\b|\b500\b|unavailable|high demand|overloaded|temporarily unavailable|service unavailable|internal server error/i;
+
 export function isRateLimitError(error: unknown): boolean {
   const message = error instanceof Error ? error.message : String(error);
   return RATE_LIMIT_PATTERN.test(message);
+}
+
+export function isTransientProviderError(error: unknown): boolean {
+  const message = error instanceof Error ? error.message : String(error);
+  return TRANSIENT_PROVIDER_PATTERN.test(message);
 }
 
 export function parseRetryDelayMs(error: unknown): number | null {

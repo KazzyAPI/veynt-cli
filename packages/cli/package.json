@@ -1,18 +1,51 @@
 {
-  "name": "@veynt/cli",
-  "version": "0.1.0",
+  "name": "veynt-cli",
+  "version": "0.1.2",
+  "description": "AI-native pre-commit engineering reviewer for Git diffs",
+  "license": "MIT",
   "type": "module",
   "bin": {
-    "veynt": "./dist/index.js"
+    "veynt": "./bin/veynt.js"
   },
   "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "files": [
+    "bin",
+    "dist/index.js"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KazzyAPI/veynt-cli.git",
+    "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/KazzyAPI/veynt-cli/issues"
+  },
+  "homepage": "https://github.com/KazzyAPI/veynt-cli#readme",
+  "keywords": [
+    "git",
+    "pre-commit",
+    "code-review",
+    "ai",
+    "cli",
+    "security",
+    "lint"
+  ],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "node ./esbuild.mjs",
+    "build:tsc": "tsc -p tsconfig.json",
+    "prepublishOnly": "node ./esbuild.mjs",
     "test": "vitest run",
     "lint": "tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
+    "commander": "^13.1.0",
+    "yaml": "^2.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.7",
     "@veynt/analyzers": "workspace:*",
     "@veynt/config": "workspace:*",
     "@veynt/core": "workspace:*",
@@ -21,11 +54,7 @@
     "@veynt/hooks": "workspace:*",
     "@veynt/providers": "workspace:*",
     "@veynt/review-engine": "workspace:*",
-    "commander": "^13.1.0",
-    "yaml": "^2.7.0"
-  },
-  "devDependencies": {
-    "@types/node": "^22.10.7",
+    "esbuild": "^0.25.0",
     "typescript": "^5.7.3",
     "vitest": "^3.0.5"
   }

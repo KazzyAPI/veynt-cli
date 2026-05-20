@@ -2,9 +2,9 @@ import type { ChunkingConfig } from "@veynt/config";
 import {
   delayForRequestsPerMinute,
   formatAiResponseLogBlock,
-  isRateLimitError,
-  isRetryableFetchError,
+  isRetryableProviderError,
   parseRetryDelayMs,
+  retryReason,
   sleep,
 } from "@veynt/core";
 import type { IReviewProvider, ProviderRequest } from "@veynt/providers";
@@ -31,7 +31,7 @@ export class ChunkedProviderClient {
         this.onProgress?.(formatAiResponseLogBlock(label, response));
         return response;
       } catch (error) {
-        const retryable = isRateLimitError(error) || isRetryableFetchError(error);
+        const retryable = isRetryableProviderError(error);
         if (!retryable || attempt === maxAttempts - 1) {
           throw error;
         }
@@ -44,9 +44,8 @@ export class ChunkedProviderClient {
             delayForRequestsPerMinute(this.chunking.requestsPerMinute || 5),
           );
 
-        const reason = isRateLimitError(error) ? "Rate limited" : "Connection error";
         this.onProgress?.(
-          `${reason} — waiting ${Math.ceil(backoffMs / 1000)}s (${label}, retry ${attempt + 2}/${maxAttempts})`,
+          `${retryReason(error)} — waiting ${Math.ceil(backoffMs / 1000)}s (${label}, retry ${attempt + 2}/${maxAttempts})`,
         );
         await sleep(backoffMs);
       }

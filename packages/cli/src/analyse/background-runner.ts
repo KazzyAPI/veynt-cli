@@ -1,13 +1,30 @@
 import { spawn } from "node:child_process";
 import { openSync, closeSync } from "node:fs";
-import { dirname, join } from "node:path";
+import { basename, dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { ensureDirectory } from "@veynt/core";
 import { AnalyseStatusStore, type AnalyseStatus } from "./analyse-status.js";
 
 function resolveCliEntry(): string {
+  const invoked = process.argv[1];
+  if (invoked) {
+    const normalized = invoked.replace(/\\/g, "/");
+    if (normalized.endsWith("/bin/veynt.js")) {
+      return join(dirname(invoked), "..", "dist", "index.js");
+    }
+    return invoked;
+  }
+
   const currentFile = fileURLToPath(import.meta.url);
-  return join(dirname(currentFile), "..", "index.js");
+  const dir = dirname(currentFile);
+
+  // Esbuild bundle: entire CLI is dist/index.js
+  if (basename(dir) === "dist" && basename(currentFile) === "index.js") {
+    return currentFile;
+  }
+
+  // tsc output: dist/analyse/background-runner.js -> dist/index.js
+  return join(dir, "..", "index.js");
 }
 
 async function isProcessAlive(pid: number): Promise<boolean> {

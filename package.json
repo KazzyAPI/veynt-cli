@@ -1,6 +1,6 @@
 {
   "name": "veynt",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "AI-native pre-commit engineering reviewer for Git diffs",
   "license": "MIT",
@@ -12,6 +12,8 @@
   },
   "scripts": {
     "build": "pnpm -r run build",
+    "build:cli": "pnpm --filter veynt-cli run build",
+    "publish:cli": "pnpm run build:cli && npm publish --prefix packages/cli",
     "test": "vitest run",
     "lint": "pnpm -r run lint",
     "veynt": "node packages/cli/dist/index.js"

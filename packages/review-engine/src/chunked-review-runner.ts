@@ -6,8 +6,10 @@ import { PromptBuilder } from "./prompt-builder.js";
 import {
   delayForRequestsPerMinute,
   isRateLimitError,
-  isRetryableFetchError,
+  isRetryableProviderError,
+  isTransientProviderError,
   parseRetryDelayMs,
+  retryReason,
   sleep,
 } from "@veynt/core";
 import type { ReviewChunk } from "./review-chunker.js";
@@ -88,9 +90,9 @@ export class ChunkedReviewRunner {
         chunksInvoked++;
       } catch (error) {
         chunksFailed++;
-        if (isRateLimitError(error)) {
+        if (isRateLimitError(error) || isTransientProviderError(error)) {
           console.warn(
-            `\x1b[33m⚠ Chunk ${chunk.index}/${chunk.total} skipped after rate-limit retries.\x1b[0m`,
+            `\x1b[33m⚠ Chunk ${chunk.index}/${chunk.total} skipped after retries (${retryReason(error).toLowerCase()}).\x1b[0m`,
           );
           continue;
         }
@@ -131,7 +133,7 @@ export class ChunkedReviewRunner {
         return await this.provider.review(request);
       } catch (error) {
         lastError = error;
-        const retryable = isRateLimitError(error) || isRetryableFetchError(error);
+        const retryable = isRetryableProviderError(error);
         if (!retryable || attempt === maxAttempts - 1) {
           throw error;
         }
@@ -144,9 +146,8 @@ export class ChunkedReviewRunner {
             delayForRequestsPerMinute(this.chunking.requestsPerMinute || 5),
           );
 
-        const reason = isRateLimitError(error) ? "rate limited" : "connection error";
         console.warn(
-          `\x1b[33m  ${this.providerName} ${reason} — waiting ${Math.ceil(backoffMs / 1000)}s before retry ${attempt + 2}/${maxAttempts}...\x1b[0m`,
+          `\x1b[33m  ${this.providerName} ${retryReason(error).toLowerCase()} — waiting ${Math.ceil(backoffMs / 1000)}s before retry ${attempt + 2}/${maxAttempts}...\x1b[0m`,
         );
         await sleep(backoffMs);
       }

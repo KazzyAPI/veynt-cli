@@ -38,10 +38,12 @@ export {
 } from "./prompt-tokens.js";
 export {
   isRateLimitError,
+  isTransientProviderError,
   parseRetryDelayMs,
   sleep,
   delayForRequestsPerMinute,
 } from "./rate-limit.js";
+export { isRetryableProviderError, retryReason } from "./provider-retry.js";
 export { isRetryableFetchError, formatFetchError } from "./network-errors.js";
 export {
   formatAiResponseForLog,
