@@ -62,10 +62,12 @@ jobs:
         run: pnpm run build
 
       - name: Set package version from release tag
+        working-directory: packages/cli
         run: |
           TAG="${{ github.event.release.tag_name }}"
           VERSION="${TAG#v}"
-          npm version "$VERSION" --no-git-tag-version --prefix packages/cli
+          npm version "$VERSION" --no-git-tag-version
 
       - name: Publish to npm
-        run: npm publish --prefix packages/cli
+        working-directory: packages/cli
+        run: npm publish
