@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Veynt — Commit blocked</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="bg" aria-hidden="true">
+      <div class="orbViolet"></div>
+      <div class="grid"></div>
+    </div>
+
+    <main class="pageShell">
+      <header class="header">
+        <div class="brand">
+          <img src="/icon.svg" alt="" class="icon" width="32" height="32" />
+          <span class="wordmark">Veynt</span>
+        </div>
+        <span class="localBadge">Local only</span>
+      </header>
+
+      <section id="statusBanner" class="statusBanner blocked" hidden>
+        <h1 id="statusTitle">Commit blocked</h1>
+        <p id="statusSubtitle" class="statusSubtitle"></p>
+      </section>
+
+      <div class="layout">
+        <section class="panel" aria-labelledby="ai-heading">
+          <div class="panelHeader">
+            <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
+            <span id="ai-heading" class="panelTitle">AI review status</span>
+          </div>
+          <div class="panelBody" id="aiStatus">
+            <p class="muted">Connecting…</p>
+          </div>
+        </section>
+
+        <section class="panel findingsPanel" aria-labelledby="findings-heading">
+          <div class="panelHeader">
+            <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
+            <span id="findings-heading" class="panelTitle">Findings</span>
+            <span id="findingsCount" class="findingsCount"></span>
+          </div>
+          <div class="panelBody findingsList" id="findingsList">
+            <p class="muted">Waiting for scan…</p>
+          </div>
+        </section>
+      </div>
+
+      <section class="actions" id="actions" hidden>
+        <div class="overrideCard">
+          <h2>Override this commit</h2>
+          <p class="muted">
+            Skips AI and rule checks for the <strong>next</strong> commit only. Use when you accept the risk.
+          </p>
+          <label class="reasonLabel" for="overrideReason">Reason (optional)</label>
+          <textarea
+            id="overrideReason"
+            class="reasonInput"
+            rows="2"
+            placeholder="e.g. emergency hotfix, false positive"
+          ></textarea>
+          <div class="actionRow">
+            <button type="button" class="primaryCta" id="overrideBtn">Allow next commit</button>
+            <button type="button" class="secondaryCta" id="refreshBtn">Refresh</button>
+          </div>
+          <p id="overrideMessage" class="overrideMessage" hidden></p>
+        </div>
+        <p class="hint">
+          After override, run <code>git commit</code> again. Override clears automatically after a successful scan.
+        </p>
+      </section>
+    </main>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

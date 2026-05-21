@@ -1,4 +1,11 @@
 import * as esbuild from "esbuild";
+import { cp, mkdir } from "node:fs/promises";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const root = dirname(fileURLToPath(import.meta.url));
+const publicSrc = join(root, "src/dashboard/public");
+const publicDest = join(root, "dist/dashboard/public");
 
 await esbuild.build({
   entryPoints: ["src/index.ts"],
@@ -8,8 +15,8 @@ await esbuild.build({
   format: "esm",
   outfile: "dist/index.js",
   external: ["commander", "yaml"],
-  banner: {
-    js: "#!/usr/bin/env node",
-  },
   logLevel: "info",
 });
+
+await mkdir(publicDest, { recursive: true });
+await cp(publicSrc, publicDest, { recursive: true });

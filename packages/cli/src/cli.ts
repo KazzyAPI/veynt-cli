@@ -7,6 +7,7 @@ import { OverrideCommand } from "./commands/override.js";
 import { IgnoreCommand } from "./commands/ignore.js";
 import { ConfigCommand } from "./commands/config.js";
 import { HooksCommand } from "./commands/hooks.js";
+import { DashboardCommand } from "./commands/dashboard.js";
 import { AppContext } from "./app-context.js";
 
 export async function runCli(argv: string[]): Promise<void> {
@@ -54,9 +55,21 @@ export async function runCli(argv: string[]): Promise<void> {
     .option("--branch <name>", "Compare against target branch (CI mode)")
     .option("--hook", "Invoked from Git pre-commit hook")
     .option("--verbose", "Show debug output")
+    .option("--no-ui", "Skip local review dashboard")
     .action(async (opts) => {
-      const exitCode = await new ScanCommand(context).execute(opts);
+      const exitCode = await new ScanCommand(context).execute({
+        ...opts,
+        noUi: opts.noUi,
+      });
       process.exit(exitCode);
+    });
+
+  program
+    .command("dashboard")
+    .description("Run local review dashboard (127.0.0.1 only)")
+    .option("--repo <path>", "Repository root", repoRoot)
+    .action(async (opts: { repo: string }) => {
+      await new DashboardCommand().execute(opts.repo);
     });
 
   program

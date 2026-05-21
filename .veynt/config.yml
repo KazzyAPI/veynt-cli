@@ -1,15 +1,19 @@
 version: "1"
 provider:
-  name: ollama
-  model: hf.co/lmstudio-community/DeepSeek-Coder-V2-Lite-Instruct-GGUF:Q4_K_M
+  name: gemini
+  model: gemini-2.5-flash
   maxTokens: 4096
 review:
-  chunking:
-    delayMsBetweenChunks: 0
-    requestsPerMinute: 0
-  strictness: balanced
+  strictness: advisory
   suggestions: true
   verbose: false
+  chunking:
+    enabled: true
+    maxFilesPerChunk: 4
+    maxCharsPerChunk: 40000
+    delayMsBetweenChunks: 2000
+    requestsPerMinute: 5
+    maxRetries: 6
 blocking:
   local:
     - high
@@ -25,3 +29,8 @@ scan:
   includeContextFiles: true
   maxContextFiles: 10
   scanRuleFiles: true
+  excludePatterns:
+    - pnpm-lock.yaml
+    - package-lock.json
+    - yarn.lock
+    - "**/*.lock"

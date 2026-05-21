@@ -9,4 +9,5 @@ coverage/
 .veynt/override
 .veynt/analyse.log
 .veynt/analyse-status.json
+.veynt/dashboard/
 .pnpm-store/*
