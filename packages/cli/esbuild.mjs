@@ -8,5 +8,8 @@ await esbuild.build({
   format: "esm",
   outfile: "dist/index.js",
   external: ["commander", "yaml"],
+  banner: {
+    js: "#!/usr/bin/env node",
+  },
   logLevel: "info",
 });

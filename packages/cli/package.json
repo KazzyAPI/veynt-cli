@@ -5,11 +5,10 @@
   "license": "MIT",
   "type": "module",
   "bin": {
-    "veynt": "./bin/veynt.js"
+    "veynt": "./dist/index.js"
   },
   "main": "./dist/index.js",
   "files": [
-    "bin",
     "dist/index.js"
   ],
   "engines": {
