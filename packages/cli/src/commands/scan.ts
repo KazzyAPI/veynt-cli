@@ -51,7 +51,7 @@ export class ScanCommand {
     const overridePath = join(repoRoot, ".veynt", "override");
     const overrideActive = await fileExists(overridePath);
 
-    const useDashboard = shouldUseDashboard(options.noUi ?? false);
+    const useDashboard = shouldUseDashboard(options.noUi ?? false, overrideActive);
     let dashboard: ScanDashboardHandle | undefined;
 
     const updateSession = async (patch: SessionPatch) => {
