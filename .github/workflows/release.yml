@@ -48,8 +48,8 @@ jobs:
         with:
           node-version: 24
 
-      - name: Use npm with trusted publishing support
-        run: npm install -g npm@latest
+      - name: Upgrade npm for trusted publishing
+        run: npm install -g npm@11.6.2
 
       - name: Prepare npm for OIDC publish
         run: |
