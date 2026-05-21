@@ -47,7 +47,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-          registry-url: https://registry.npmjs.org/
           cache: pnpm
 
       - name: Verify npm supports OIDC publish
@@ -64,10 +63,13 @@ jobs:
       - name: Set package version from release tag
         working-directory: packages/cli
         run: |
+          chmod +x bin/veynt.js
           TAG="${{ github.event.release.tag_name }}"
           VERSION="${TAG#v}"
           npm version "$VERSION" --no-git-tag-version
 
       - name: Publish to npm
         working-directory: packages/cli
+        env:
+          NODE_AUTH_TOKEN: ""
         run: npm publish
