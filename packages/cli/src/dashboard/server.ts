@@ -121,8 +121,8 @@ function buildRequestHandler(repoRoot: string, publicDir: string) {
       res.writeHead(405);
       res.end("Method not allowed");
     } catch (error) {
-      const message = error instanceof Error ? error.message : String(error);
-      sendJson(res, 500, { error: message });
+      console.error("Dashboard server request failed:", error);
+      sendJson(res, 500, { error: "Internal server error" });
     }
   };
 }
